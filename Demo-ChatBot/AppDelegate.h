@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatLogController.h"
+#import "HomeViewController.h"
+#import "Common.h"
+#import "SWRevealViewController.h"
+#import "SideMenuController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

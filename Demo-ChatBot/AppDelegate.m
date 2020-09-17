@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +18,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:chatState];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorNamed:@"orangeHeaderColor"]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorNamed:@"orangeHeaderColor"]];
+    [ChatLogController sharedClass];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    SideMenuController *sideMenuController = [[SideMenuController alloc] init];
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    
+    UINavigationController *sideMenuNavigationController = [[UINavigationController alloc] initWithRootViewController:sideMenuController];
+    UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    
+    SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:sideMenuNavigationController
+                                                                                      frontViewController:homeNavigationController];
+    
+    [revealController setDelegate:self];
+    [self.window setRootViewController:revealController];
+    [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 
